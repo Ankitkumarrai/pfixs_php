@@ -1,0 +1,19 @@
+ body{
+    background-color:azure;
+
+ }
+ 
+ .sidebar ul{
+    list-style: none;font-size:large;font-weight:500;
+ }
+ .sidebar ul li{
+    display:block;margin-top:40px;font-size:22px;font-weight:500;
+ }  
+ .login{
+   margin-left:30px;
+ }
+ .cancel
+ {
+   margin-right:30px;
+ }
+ 
