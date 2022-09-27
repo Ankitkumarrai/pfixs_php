@@ -1,0 +1,15 @@
+ul.leftbar{
+    padding-top:10px;
+}
+ul.leftbar li{
+    margin:30px;list-style:none;
+}
+ul.leftbar li a{ 
+    text-decoration:none;font-size:17px;color:white;
+}
+active:ul.leftbar li a{
+     color:whitesmoke;
+}
+ .box{
+    margin:30px;width:158px;color:azure;
+ }

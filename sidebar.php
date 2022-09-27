@@ -1,4 +1,4 @@
-<ul>Intranship Course Syllabus :
+<ul class="side">Intranship Course Syllabus :
           <li><a>Front end design Intranship </a></li>
           <li><a>PHP Intranship </a></li>
           <li><a>Java Intranship </a></li>
