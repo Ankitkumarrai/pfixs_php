@@ -5,11 +5,6 @@ if (!isset($_SESSION['User_name'])) {
     header('location:Log_in.php');
 }
 
-$msg  = '';
-if (isset($_GET['msg'])) {
-    $msg = $_GET['msg'];
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -42,19 +37,10 @@ if (isset($_GET['msg'])) {
             </div>
             <div class="col-md-8 ms-5 ps-5 text-center">
                 <div class="row">
-                    <?php
-                    if (isset($_GET['msg'])) {
-                        
-                    ?>
-                        <div class="alert alert-success mt-3" role="alert">
-                            <?php echo $msg; ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                    <?php include 'boxes.php' ?>
+                 
+                      dfvdgvfddgvf
 
-
+                   
                 </div>
 
 

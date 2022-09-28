@@ -20,6 +20,6 @@
 <div class="col-md-2 p-5 bg-secondary box">
     Report
 </div>
-<!-- <div class="col-md-2 p-5 bg-danger box">
+<div class="col-md-2 p-5 bg-danger box">
     Expenses
-</div> -->
+</div>
