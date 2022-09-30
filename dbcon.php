@@ -3,14 +3,17 @@
    $user="root";
    $password="";
    $db="registration";
-   $conn=mysqli_connect($server,$user,$password,$db) or die("connection fallied");
-       
+   $conn=mysqli_connect($server,$user,$password,$db) or die("conection failed");
       if($conn){
-         echo "connection successfull..";
+         ?>
+
+         <?php 
       }
       else
       {
-         echo "connection failed ...";
+         ?>
+  
+         <?php
       }
 
 ?>
