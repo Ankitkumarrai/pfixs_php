@@ -33,7 +33,7 @@ if (isset($_GET['msg'])) {
 
         </div>
         <div class="row">
-            <div class="col-md-3 bg-dark text-white">
+            <div class="col-md-3 bg-dark  text-white">
                 <?php include 'leftbar.php' ?>
                 <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['User_name']; ?>&nbsp;&nbsp;

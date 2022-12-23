@@ -14,11 +14,12 @@ if (array_key_exists("save", $_REQUEST)) {
     $sname = mysqli_real_escape_string($conn, $_REQUEST['sname']);
     $fname = mysqli_real_escape_string($conn, $_REQUEST['fname']);
     $mname = mysqli_real_escape_string($conn, $_REQUEST['mname']);
-    $DOB = mysqli_real_escape_string($conn, $_REQUEST['DOB']);
+    $dob = mysqli_real_escape_string($conn, $_REQUEST['dob']);
     $gender = mysqli_real_escape_string($conn, $_REQUEST['gender']);
-    $DOM = mysqli_real_escape_string($conn, $_REQUEST['DOM']);
+    $admission_date = mysqli_real_escape_string($conn, $_REQUEST['admission_date']);
     $class = mysqli_real_escape_string($conn, $_REQUEST['class']);
-    $paidfee = mysqli_real_escape_string($conn, $_REQUEST['paidfee']);
+    $section = mysqli_real_escape_string($conn, $_REQUEST['section']);
+    $admission_fee = mysqli_real_escape_string($conn, $_REQUEST['admission_fee']);
     $contact = mysqli_real_escape_string($conn, $_REQUEST['contact']);
     $alternate = mysqli_real_escape_string($conn, $_REQUEST['alternate']);
     $address = mysqli_real_escape_string($conn, $_REQUEST['address']);
@@ -27,13 +28,15 @@ if (array_key_exists("save", $_REQUEST)) {
     $data = mysqli_fetch_assoc($result);
     $uniqueCode = '2022000' + $data['rollNo'] + 1;
 
-    $sql = "insert into admissionform(rollnumber,sname,fname,mname,DOB,gender,DOM,class,paidfee,contact,alternate,address)values('$uniqueCode','$sname','$fname','$mname','$DOB','$gender','$DOM','$class','$paidfee','$contact','$alternate','$address')";
+    $sql = "insert into admissionform(rollnumber,sname,fname,mname,dob,gender,admission_date,class,section,admission_fee,contact,alternate,address)values('$uniqueCode','$sname','$fname','$mname','$dob','$gender','$admission_date','$class','$section','$admission_fee','$contact','$alternate','$address')";
     $query = mysqli_query($conn, $sql);
-    if ($query) {
-        header('location:adminpanel.php?msg=Data Inserted Successfully');
-    }
-}
+     
+    header('location:admission_print.php?rollnumber='.$uniqueCode);
+              }
+ 
+
 ?>
+
 
 
 
@@ -50,19 +53,26 @@ if (array_key_exists("save", $_REQUEST)) {
 
 
 <body>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <?php include 'header.php' ?>
+                <?php include 'header.php'; 
+                // echo time();
+                // echo "<br>";
+                // echo date("Y-m-d h:i:s",1609505629);
+                ?>
             </div>
 
         </div>
         <div class="row">
             <div class="col-md-3 bg-dark text-white">
-                <?php include 'leftbar.php' ?>
+                <?php include 'leftbar.php'; ?>
                 <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $_SESSION['User_name']; ?>&nbsp;&nbsp;
-                    <button type="submit" name="save" class="btn btn-danger"><a href="logout.php" class="text-white" style="text-decoration:none;">Logout</a></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php echo $_SESSION['User_name']; ?>&nbsp;&nbsp;
+                    <button type="submit" name="save" class="btn btn-danger"><a href="logout.php" class="text-white"
+                            style="text-decoration:none;">Logout</a></button>
                 </div>
             </div>
             <div class="col-md-8">
@@ -79,13 +89,15 @@ if (array_key_exists("save", $_REQUEST)) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="sname" class="form-label">Student Name</label>
-                                <input type="text" name="sname" id="sname" class="form-control" placeholder="Student name" required />
+                                <input type="text" name="sname" id="sname" class="form-control"
+                                    placeholder="Student name" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname" class="form-label">Father Name</label>
-                                <input type="text" name="fname" id="fname" class="form-control" placeholder="Father name" required />
+                                <input type="text" name="fname" id="fname" class="form-control"
+                                    placeholder="Father name" required />
                             </div>
                         </div>
                     </div>
@@ -93,14 +105,16 @@ if (array_key_exists("save", $_REQUEST)) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="mname" class="form-label">Mother Name</label>
-                                <input type="text" name="mname" id="mname" class="form-control" placeholder="Mother name" required />
+                                <input type="text" name="mname" id="mname" class="form-control"
+                                    placeholder="Mother name" required />
 
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="DOB" class="form-label">D.O.B</label>
-                                <input type="date" name="DOB" id="DOB" class="form-control" required />
+                                <label for="dob" class="form-label">D.O.B <span
+                                        style="color:">(mm/dd/yyyy)</span></label>
+                                <input type="date" name="dob" id="dob" class="form-control" required />
 
                             </div>
                         </div>
@@ -111,13 +125,15 @@ if (array_key_exists("save", $_REQUEST)) {
                                 <label class="form-label"> Gender :</label>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                                        required checked>
                                     <label class="form-check-label" for="male">
                                         Male
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" required checked>
+                                    <input class="form-check-input" type="radio" name="gender" id="female"
+                                        value="female" required>
                                     <label class="form-check-label" for="female">
                                         Female
                                     </label>
@@ -126,30 +142,58 @@ if (array_key_exists("save", $_REQUEST)) {
                         </div>
                         <div class="col-md-6">
                             <div class="from-group">
-                                <label for="DOM" class="form-label">Date of Admission</label>
-                                <input type="date" name="DOM" id="DOM" class="form-control" required />
+                                <label for="admission_date" class="form-label">Date of Admission</label>
+                                <input type="date" name="admission_date" id="admission_date" class="form-control"
+                                    value="<?=date("Y-m-d");?>" required />
                             </div>
                         </div>
 
                     </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="contact" class="form-label">Contact No.</label>
+                                <input type="text" name="contact" id="contact" placeholder="Contact Number"
+                                    class="form-control" required />
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="alternate" class="form-label">Alternate No.</label>
+                                <input type="text" name="alternate" id="alternate" placeholder="Alternate Number"
+                                    class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" name="address" id="address"
+                                    placeholder="Enter Full Address" required />
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+
                                 <label for="classlist" class="form-label">Class </label>
-                                <select id="classlist" name="class" class="form-select" required>
-                                    <option selected>Select Class</option>
-                                    <option value="1st">1st</option>
-                                    <option value="2nd">2nd</option>
-                                    <option value="3rd">3rd</option>
-                                    <option value="4th">4th</option>
-                                    <option value="5th">5th</option>
-                                    <option value="6th">6th</option>
-                                    <option value="7th">7th</option>
-                                    <option value="8th">8th</option>
-                                    <option value="9th">9th</option>
-                                    <option value="10th">10th</option>
-                                    <option value="11th">11th</option>
-                                    <option value="12th">12th</option>
+                                <select id="classlist" name="class" class="form-control" required>
+                                    <option value="">Class</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
 
 
                                 </select>
@@ -157,37 +201,37 @@ if (array_key_exists("save", $_REQUEST)) {
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="paidfee" class="form-label">Paid Fee.</label>
-                                <input type="number" name="paidfee" id="paidfee" class="form-control" placeholder="Paid Fee" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="contact" class="form-label">Contact No.</label>
-                                <input type="text" name="contact" id="contact" placeholder="Contact Number" class="form-control" required />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
 
-                            <div class="form-group">
-                                <label for="alternate" class="form-label">Alternate No.</label>
-                                <input type="text" name="alternate" id="alternate" placeholder="Alternate Number" class="form-control" required />
+                                <label for="sectionlist" class="form-label">Section</label>
+                                <select id="sectionlist" name="section" class="form-control" required>
+                                    <option value="">section</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+
+                                </select>
                             </div>
                         </div>
+
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" name="address" id="address" placeholder="Enter Full Address" required />
+                                <input type="hidden" name="admission_fee" value="pending" />
+                                <input type="checkbox" name="admission_fee" value="1100">Admission fee
                             </div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-sm-3 mt-3">
-                            <button type="submit" name="save" class="btn btn-primary form-control">Form Submit</button>
+                             
+                            <button type="submit" name="save" class="btn btn-primary form-control">
+                                Form Submit
+                            </button>
+                             
                         </div>
                     </div>
 

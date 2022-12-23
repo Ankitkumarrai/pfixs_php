@@ -3,17 +3,8 @@
    $user="root";
    $password="";
    $db="registration";
-   $conn=mysqli_connect($server,$user,$password,$db) or die("conection failed");
-      if($conn){
-         ?>
-
-         <?php 
-      }
-      else
-      {
-         ?>
-  
-         <?php
-      }
-
+   $conn=mysqli_connect($server,$user,$password,$db);
+     if($conn){
+    //  echo "database connected";
+     }
 ?>

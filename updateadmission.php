@@ -63,11 +63,11 @@ if (!isset($_SESSION['User_name'])) {
                             $sname = mysqli_real_escape_string($conn, $_REQUEST['sname']);
                             $fname = mysqli_real_escape_string($conn, $_REQUEST['fname']);
                             $mname = mysqli_real_escape_string($conn, $_REQUEST['mname']);
-                            $DOB = mysqli_real_escape_string($conn, $_REQUEST['DOB']);
+                            $dob = mysqli_real_escape_string($conn, $_REQUEST['dob']);
                             $gender = mysqli_real_escape_string($conn, $_REQUEST['gender']);
-                            $DOM = mysqli_real_escape_string($conn, $_REQUEST['DOM']);
+                            $admission_date = mysqli_real_escape_string($conn, $_REQUEST['admission_date']);
                             $class = mysqli_real_escape_string($conn, $_REQUEST['class']);
-                            $paidfee = mysqli_real_escape_string($conn, $_REQUEST['paidfee']);
+                            
                             $contact = mysqli_real_escape_string($conn, $_REQUEST['contact']);
                             $alternate = mysqli_real_escape_string($conn, $_REQUEST['alternate']);
                             $address = mysqli_real_escape_string($conn, $_REQUEST['address']);
@@ -75,7 +75,7 @@ if (!isset($_SESSION['User_name'])) {
                             // $query = mysqli_query($conn, $sql);
 
 
-                            $update="update admissionform set id=$id,sname='$sname',fname='$fname',mname='$mname',DOB='$DOB',gender='$gender',DOM='$DOM',class='$class',paidfee='$paidfee',contact='$contact',alternate='$alternate',address='$address' where id= $id";
+                            $update="update admissionform set id=$id,sname='$sname',fname='$fname',mname='$mname',dob='$dob',gender='$gender',admission_date='$admission_date',class='$class' ,contact='$contact',alternate='$alternate',address='$address' where id= $id";
                                $updaterun=mysqli_query($conn,$update);
                             if($updaterun){
                                 header('location:adminpanel.php?msg=Data update Successfully');
@@ -139,7 +139,7 @@ if (!isset($_SESSION['User_name'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="DOB" class="form-label">D.O.B</label>
-                                <input type="date" name="DOB" id="DOB" class="form-control" value="<?php echo $arraydata['DOB'] ?>" required />
+                                <input type="date" name="dob" id="dob" class="form-control" value="<?php echo $arraydata['dob'] ?>" required />
 
                             </div>
                         </div>
@@ -165,8 +165,8 @@ if (!isset($_SESSION['User_name'])) {
                         </div>
                         <div class="col-md-6">
                             <div class="from-group">
-                                <label for="DOM" class="form-label">Date of Admission</label>
-                                <input type="date" name="DOM" id="DOM" class="form-control" value="<?php echo $arraydata['DOM'] ?>" required />
+                                <label for="admission_date" class="form-label">Date of Admission</label>
+                                <input type="date" name="admission_date" id="admission_date" class="form-control" value="<?php echo $arraydata['admission_date'] ?>" required />
                             </div>
                         </div>
 
@@ -178,28 +178,23 @@ if (!isset($_SESSION['User_name'])) {
                             <label for="classlist" class="form-label">Class </label>
                                 <select id="classlist" name="class" class="form-select" value="<?php echo $arraydata['class'] ?>" required>
                                     <option selected>Select Class</option>
-                                    <option value="1st">1st</option>
-                                    <option value="2nd">2nd</option>
-                                    <option value="3rd">3rd</option>
-                                    <option value="4th">4th</option>
-                                    <option value="5th">5th</option>
-                                    <option value="6th">6th</option>
-                                    <option value="7th">7th</option>
-                                    <option value="8th">8th</option>
-                                    <option value="9th">9th</option>
-                                    <option value="10th">10th</option>
-                                    <option value="11th">11th</option>
-                                    <option value="12th">12th</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
 
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="paidfee" class="form-label">Paid Fee.</label>
-                                <input type="number" name="paidfee" id="paidfee" class="form-control" placeholder="Paid Fee" value="<?php echo $arraydata['paidfee'] ?>" required />
-                            </div>
-                        </div>
+                         
                     </div>
                     <div class="row">
                         <div class="col-md-6">
